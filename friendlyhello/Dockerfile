@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Usuario sin privilegios para ejecutar la aplicación
-RUN useradd --system --no-create-home app
+RUN useradd --system --create-home app
 USER app
 
 # Variable de entorno y puerto de la aplicación
