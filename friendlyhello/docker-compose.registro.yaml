@@ -1,0 +1,21 @@
+# Ejercicio 1 de la Parte 3: usar TU imagen publicada en lugar de build: .
+# Cambia <usuario> por tu usuario de Docker Hub (en minusculas).
+# Ejercicio 2: reemplaza la linea image: por la imagen de un companero.
+services:
+  web:
+    image: <usuario>/friendlyhello:0.1.0
+    ports:
+      - "4000:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+  redis:
+    image: redis:8.8
+    command: redis-server --appendonly yes
+    volumes:
+      - ./data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
